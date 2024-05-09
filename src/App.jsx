@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Login from "./pages/login";
+import Register from "./pages/register";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,6 +23,14 @@ const router = createBrowserRouter([
         element: (
             <>
                 <Login />
+            </>
+        ),
+    },
+    {
+        path: "/register",
+        element: (
+            <>
+                <Register />
             </>
         ),
     },

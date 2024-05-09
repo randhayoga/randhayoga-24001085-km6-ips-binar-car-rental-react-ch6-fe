@@ -1,6 +1,6 @@
 import { Card, FloatingLabel, Form, Button } from "react-bootstrap";
 
-function Login() {
+function Register() {
     return (
         <>
             <style type="text/css">
@@ -12,7 +12,13 @@ function Login() {
                         background-color: #0D28A6;
                     }
                     .btn-blue:hover {
-                        background-color: #091B6F;
+                        background-color: #5E70C4;
+                    }
+                    input[type="file"]{
+                        height:50px;
+                    }
+                    input[type="file"]::-webkit-file-upload-button{
+                        height:50px;
                     }
                 `}
             </style>
@@ -25,11 +31,8 @@ function Login() {
                             className="logo-size mb-4 mt-2"
                         />
                     </div>
-                    <Card.Title className="text-center fs-3 mb-0">
-                        Welcome back,
-                    </Card.Title>
-                    <Card.Text className="text-center fs-5 mb-4">
-                        please sign in to continue
+                    <Card.Text className="text-center fs-5">
+                        Please fill in the form to continue
                     </Card.Text>
                     <Form>
                         <FloatingLabel
@@ -44,9 +47,16 @@ function Login() {
                             />
                         </FloatingLabel>
                         <FloatingLabel
+                            controlId="floatingName"
+                            label="Name"
+                            className="mb-3"
+                        >
+                            <Form.Control type="text" placeholder="" required />
+                        </FloatingLabel>
+                        <FloatingLabel
                             controlId="floatingPassword"
                             label="Password"
-                            className="mb-5"
+                            className="mb-3"
                         >
                             <Form.Control
                                 type="password"
@@ -54,6 +64,30 @@ function Login() {
                                 required
                             />
                         </FloatingLabel>
+                        <FloatingLabel
+                            controlId="floatingConfirmPassword"
+                            label="Confirm Password"
+                            className="mb-3"
+                        >
+                            <Form.Control
+                                type="password"
+                                placeholder=""
+                                required
+                            />
+                        </FloatingLabel>
+                        <Form.Group className="mb-3" controlId="floatingFile">
+                            <Form.Label className="text-black ms-3 mb-1">
+                                Profile Picture{" "}
+                                <span className="text-info-emphasis">
+                                    (optional)
+                                </span>
+                            </Form.Label>
+                            <Form.Control
+                                type="file"
+                                accept="image/*"
+                                required
+                            />
+                        </Form.Group>
 
                         <div className="d-grid gap-2 mt-5">
                             <Button
@@ -62,11 +96,11 @@ function Login() {
                                 className="btn-blue"
                                 type="submit"
                             >
-                                Sign In
+                                Sign Up
                             </Button>
                             <Button variant="link" size="lg">
-                                {/* Add route to register */}
-                                Doesn't have an account? Sign up
+                                {/* Add route to login*/}
+                                Already have an account? Sign In
                             </Button>
                         </div>
                     </Form>
@@ -76,4 +110,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Register;
