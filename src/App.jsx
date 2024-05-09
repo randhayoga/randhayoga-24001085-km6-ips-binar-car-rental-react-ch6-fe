@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
+import Login from "./pages/login";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,6 +14,14 @@ const router = createBrowserRouter([
         element: (
             <>
                 <Navbar />
+            </>
+        ),
+    },
+    {
+        path: "/login",
+        element: (
+            <>
+                <Login />
             </>
         ),
     },
