@@ -19,6 +19,7 @@ function Login() {
 
             <Card>
                 <Card.Body>
+                    {/* Add route to home */}
                     <div className="d-flex flex-column align-items-center justify-content-center">
                         <Card.Img
                             src="images/logo.png"

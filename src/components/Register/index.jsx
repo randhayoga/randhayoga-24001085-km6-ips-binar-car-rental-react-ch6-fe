@@ -26,6 +26,7 @@ function Register() {
             <Card>
                 <Card.Body>
                     <div className="d-flex flex-column align-items-center justify-content-center">
+                        {/* Add route to home */}
                         <Card.Img
                             src="images/logo.png"
                             className="logo-size mb-4 mt-2"
