@@ -18,6 +18,12 @@ const CarCard = ({ car }) => {
                         height: 100%;
                         width: 100%;
                     }
+                    .btn-blue {
+                        background-color: #0D28A6;
+                    }
+                    .btn-blue:hover {
+                        background-color: #091B6F;
+                    }
                 `}
             </style>
             <Col md={3}>
@@ -58,7 +64,9 @@ const CarCard = ({ car }) => {
 
                         <div className="d-grid gap-2 mt-3">
                             {/* For Users */}
-                            <Button variant="primary">Rent</Button>
+                            <Button variant="primary" className="btn-blue">
+                                Rent
+                            </Button>
 
                             {/* For Admins and Superadmin */}
                             <Button variant="warning">Edit</Button>

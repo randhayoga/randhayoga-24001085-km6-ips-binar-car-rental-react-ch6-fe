@@ -34,15 +34,6 @@ const NavbarComponent = () => {
                                 Profile
                             </Nav.Link>
 
-                            {/* For Super Admin */}
-                            <Nav.Link
-                                as={Link}
-                                to="/manageUser"
-                                className="ms-3"
-                            >
-                                Manage User
-                            </Nav.Link>
-
                             {/* For Guest Users */}
                             <Nav.Link as={Link} to="/login" className="ms-3">
                                 Login
