@@ -26,7 +26,7 @@ const CarCard = ({ car }) => {
                     }
                 `}
             </style>
-            <Col md={3}>
+            <Col className="col-12 col-md-6 col-lg-4 col-xl-3">
                 <Card className="p-0 mb-4">
                     <Ratio aspectRatio="16x9">
                         <Card.Img

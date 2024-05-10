@@ -1,7 +1,7 @@
 import { Container, Col, Row } from "react-bootstrap";
 import ProfileComponent from "../../components/Profile";
 
-const Home = () => {
+const Profile = () => {
     return (
         <Container className="mt-5 pt-5">
             <Row className="row">
@@ -15,4 +15,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Profile;
