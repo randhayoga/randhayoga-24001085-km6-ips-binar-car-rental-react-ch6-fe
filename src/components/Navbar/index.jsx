@@ -34,6 +34,11 @@ const NavbarComponent = () => {
                                 Profile
                             </Nav.Link>
 
+                            {/* For Admin Users */}
+                            <Nav.Link as={Link} to="/addCar" className="ms-3">
+                                Add Car
+                            </Nav.Link>
+
                             {/* For Guest Users */}
                             <Nav.Link as={Link} to="/login" className="ms-3">
                                 Login

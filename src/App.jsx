@@ -7,6 +7,7 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Profile from "./pages/profile";
+import AddCar from "./pages/addCar";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -43,6 +44,15 @@ const router = createBrowserRouter([
             <>
                 <Navbar />
                 <Profile />
+            </>
+        ),
+    },
+    {
+        path: "/addCar",
+        element: (
+            <>
+                <Navbar />
+                <AddCar />
             </>
         ),
     },
