@@ -1,6 +1,24 @@
 import { Card, FloatingLabel, Form, Button } from "react-bootstrap";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/actions/auth";
 
 function Login() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        dispatch(login(navigate, email, password)); // fetch api
+        setIsLoading(false);
+    };
+
     return (
         <>
             <style type="text/css">
@@ -32,7 +50,7 @@ function Login() {
                     <Card.Text className="text-center fs-5 mb-4">
                         please sign in to continue
                     </Card.Text>
-                    <Form>
+                    <Form onSubmit={onSubmit}>
                         <FloatingLabel
                             controlId="floatingInput"
                             label="Email address"
@@ -41,6 +59,8 @@ function Login() {
                             <Form.Control
                                 type="email"
                                 placeholder=""
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
                         </FloatingLabel>
@@ -52,6 +72,8 @@ function Login() {
                             <Form.Control
                                 type="password"
                                 placeholder=""
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
                         </FloatingLabel>
@@ -62,11 +84,16 @@ function Login() {
                                 size="lg"
                                 className="btn-blue"
                                 type="submit"
+                                disabled={isLoading}
                             >
-                                Sign In
+                                {isLoading ? "Processing..." : "Sign in"}
                             </Button>
-                            <Button variant="link" size="lg">
-                                {/* Add route to register */}
+                            <Button
+                                variant="link"
+                                size="lg"
+                                disabled={isLoading}
+                                onClick={() => navigate("/register")}
+                            >
                                 Doesn't have an account? Sign up
                             </Button>
                         </div>

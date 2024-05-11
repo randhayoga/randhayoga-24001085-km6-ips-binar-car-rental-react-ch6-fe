@@ -1,6 +1,33 @@
 import { Card, FloatingLabel, Form, Button } from "react-bootstrap";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { register } from "../../redux/actions/auth";
 
 function Register() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [photo, setPhoto] = useState();
+    const [isLoading, setIsLoading] = useState(false);
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        if (password != confirmPassword) {
+            toast.error(`Password and confirm password must be same!`);
+            return;
+        }
+
+        setIsLoading(true);
+        dispatch(register(navigate, name, email, password, photo));
+        setIsLoading(false);
+    };
+
     return (
         <>
             <style type="text/css">
@@ -35,7 +62,7 @@ function Register() {
                     <Card.Text className="text-center fs-5">
                         Please fill in the form to continue
                     </Card.Text>
-                    <Form>
+                    <Form onSubmit={onSubmit}>
                         <FloatingLabel
                             controlId="floatingInput"
                             label="Email address"
@@ -44,6 +71,8 @@ function Register() {
                             <Form.Control
                                 type="email"
                                 placeholder=""
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
                         </FloatingLabel>
@@ -52,7 +81,13 @@ function Register() {
                             label="Name"
                             className="mb-3"
                         >
-                            <Form.Control type="text" placeholder="" required />
+                            <Form.Control
+                                type="text"
+                                placeholder=""
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
                         </FloatingLabel>
                         <FloatingLabel
                             controlId="floatingPassword"
@@ -62,6 +97,8 @@ function Register() {
                             <Form.Control
                                 type="password"
                                 placeholder=""
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
                         </FloatingLabel>
@@ -73,6 +110,10 @@ function Register() {
                             <Form.Control
                                 type="password"
                                 placeholder=""
+                                value={confirmPassword}
+                                onChange={(e) =>
+                                    setConfirmPassword(e.target.value)
+                                }
                                 required
                             />
                         </FloatingLabel>
@@ -86,7 +127,7 @@ function Register() {
                             <Form.Control
                                 type="file"
                                 accept="image/*"
-                                required
+                                onChange={(e) => setPhoto(e.target.files[0])}
                             />
                         </Form.Group>
 
@@ -96,11 +137,16 @@ function Register() {
                                 size="lg"
                                 className="btn-blue"
                                 type="submit"
+                                disabled={isLoading}
                             >
-                                Sign Up
+                                {isLoading ? "Processing..." : "Sign up"}
                             </Button>
-                            <Button variant="link" size="lg">
-                                {/* Add route to login*/}
+                            <Button
+                                variant="link"
+                                size="lg"
+                                disabled={isLoading}
+                                onClick={() => navigate("/login")}
+                            >
                                 Already have an account? Sign In
                             </Button>
                         </div>
