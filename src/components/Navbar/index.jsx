@@ -14,7 +14,7 @@ const NavbarComponent = () => {
 
             <Navbar expand="lg" className="bg-bluish" fixed="top">
                 <Container>
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand as={Link} to="/">
                         <img
                             src="images/logo.png"
                             width="90"
