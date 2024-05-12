@@ -1,7 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import FormData from "form-data";
-import fs from "fs";
 import { setCars, setCar } from "../reducers/car";
 
 export const getCars = () => async (dispatch) => {
@@ -53,8 +52,9 @@ export const createCar =
         description,
         image
     ) =>
-    async (dispatch, getState) => {
-        const { token } = getState().auth;
+    async () => {
+        const token = localStorage.getItem("token");
+        console.log(token);
 
         let data = new FormData();
         data.append("manufacturerName", manufacturerName);
@@ -87,7 +87,6 @@ export const createCar =
             url: `${import.meta.env.VITE_BACKEND_API}/cars/`,
             headers: {
                 Authorization: `Bearer ${token}`,
-                ...data.getHeaders(),
             },
             data: data,
         };
@@ -95,7 +94,8 @@ export const createCar =
         try {
             const response = await axios.request(config);
             const { data } = response.data;
-            navigate(`/car/${data.id}`);
+            console.log(data);
+            navigate("/");
         } catch (error) {
             toast.error(error?.response?.data?.message);
         }

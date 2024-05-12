@@ -1,6 +1,49 @@
 import { Card, FloatingLabel, Form, Button } from "react-bootstrap";
 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { createCar } from "../../redux/actions/car";
+
 const AddCar = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const [manufacturerName, setManufacturerName] = useState("");
+    const [modelName, setModelName] = useState("");
+    const [type, setType] = useState("");
+    const [year, setYear] = useState("");
+    const [transmission, setTransmission] = useState("");
+    const [capacity, setCapacity] = useState("");
+    const [rentPerDay, setRentPerDay] = useState("");
+    const [plate, setPlate] = useState("");
+    const [description, setDescription] = useState("");
+    const [availableAt, setAvailableAt] = useState("");
+    const [image, setImage] = useState();
+    const [isLoading, setIsLoading] = useState(false);
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        dispatch(
+            createCar(
+                navigate,
+                manufacturerName,
+                modelName,
+                type,
+                year,
+                transmission,
+                capacity,
+                rentPerDay,
+                plate,
+                availableAt,
+                description,
+                image
+            )
+        );
+        setIsLoading(false);
+    };
+
     return (
         <>
             <style type="text/css">
@@ -31,27 +74,47 @@ const AddCar = () => {
                     <Card.Text className="text-center fs-5">
                         Fill in the car's information
                     </Card.Text>
-                    <Form>
+                    <Form onSubmit={onSubmit}>
                         <FloatingLabel
                             controlId="floatingManufacturer"
                             label="Manufacturer"
                             className="mb-3"
                         >
-                            <Form.Control type="text" placeholder="" required />
+                            <Form.Control
+                                type="text"
+                                placeholder=""
+                                value={manufacturerName}
+                                onChange={(e) =>
+                                    setManufacturerName(e.target.value)
+                                }
+                                required
+                            />
                         </FloatingLabel>
                         <FloatingLabel
                             controlId="floatingModel"
                             label="Model"
                             className="mb-3"
                         >
-                            <Form.Control type="text" placeholder="" required />
+                            <Form.Control
+                                type="text"
+                                placeholder=""
+                                value={modelName}
+                                onChange={(e) => setModelName(e.target.value)}
+                                required
+                            />
                         </FloatingLabel>
                         <FloatingLabel
                             controlId="floatingType"
                             label="Type"
                             className="mb-3"
                         >
-                            <Form.Control type="text" placeholder="" required />
+                            <Form.Control
+                                type="text"
+                                placeholder=""
+                                value={type}
+                                onChange={(e) => setType(e.target.value)}
+                                required
+                            />
                         </FloatingLabel>
                         <FloatingLabel
                             controlId="floatingYear"
@@ -61,6 +124,8 @@ const AddCar = () => {
                             <Form.Control
                                 type="number"
                                 placeholder=""
+                                value={year}
+                                onChange={(e) => setYear(e.target.value)}
                                 required
                             />
                         </FloatingLabel>
@@ -69,7 +134,14 @@ const AddCar = () => {
                             label="Transmission"
                             className="mb-3"
                         >
-                            <Form.Select aria-label="Transmission" required>
+                            <Form.Select
+                                aria-label="Transmission"
+                                required
+                                value={transmission}
+                                onChange={(e) =>
+                                    setTransmission(e.target.value)
+                                }
+                            >
                                 <option value="">Select...</option>
                                 <option value="manual">Manual</option>
                                 <option value="matic">Matic</option>
@@ -83,6 +155,8 @@ const AddCar = () => {
                             <Form.Control
                                 type="number"
                                 placeholder=""
+                                value={capacity}
+                                onChange={(e) => setCapacity(e.target.value)}
                                 required
                             />
                         </FloatingLabel>
@@ -94,6 +168,8 @@ const AddCar = () => {
                             <Form.Control
                                 type="number"
                                 placeholder=""
+                                value={rentPerDay}
+                                onChange={(e) => setRentPerDay(e.target.value)}
                                 required
                             />
                         </FloatingLabel>
@@ -102,7 +178,13 @@ const AddCar = () => {
                             label="Plate"
                             className="mb-3"
                         >
-                            <Form.Control type="text" placeholder="" required />
+                            <Form.Control
+                                type="text"
+                                placeholder=""
+                                value={plate}
+                                onChange={(e) => setPlate(e.target.value)}
+                                required
+                            />
                         </FloatingLabel>
                         <FloatingLabel
                             controlId="floatingDescription"
@@ -112,6 +194,8 @@ const AddCar = () => {
                             <Form.Control
                                 as="textarea"
                                 placeholder=""
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
                                 required
                             />
                         </FloatingLabel>
@@ -120,7 +204,13 @@ const AddCar = () => {
                             label="Available At"
                             className="mb-3"
                         >
-                            <Form.Control type="date" placeholder="" required />
+                            <Form.Control
+                                type="date"
+                                placeholder=""
+                                required
+                                value={availableAt}
+                                onChange={(e) => setAvailableAt(e.target.value)}
+                            />
                         </FloatingLabel>
                         <Form.Group className="mb-3" controlId="floatingFile">
                             <Form.Label className="text-black ms-3 mb-1">
@@ -129,6 +219,7 @@ const AddCar = () => {
                             <Form.Control
                                 type="file"
                                 accept="image/*"
+                                onChange={(e) => setImage(e.target.files[0])}
                                 required
                             />
                         </Form.Group>
@@ -139,10 +230,18 @@ const AddCar = () => {
                                 size="lg"
                                 className="btn-blue"
                                 type="submit"
+                                disabled={isLoading}
                             >
-                                Confirm, Add Car
+                                {isLoading
+                                    ? "Processing..."
+                                    : "Confirm, Add Car"}
                             </Button>
-                            <Button variant="outline-warning" size="lg">
+                            <Button
+                                variant="outline-warning"
+                                size="lg"
+                                disabled={isLoading}
+                                onClick={() => navigate("/")}
+                            >
                                 Cancel
                             </Button>
                         </div>
