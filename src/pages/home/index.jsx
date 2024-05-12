@@ -9,6 +9,7 @@ const Home = () => {
     const dispatch = useDispatch();
 
     const { cars } = useSelector((state) => state.car);
+
     useEffect(() => {
         dispatch(getCars());
     }, [dispatch]);
@@ -16,8 +17,8 @@ const Home = () => {
     return (
         <Container className="mt-5 pt-5">
             <Row className="row">
-                {cars.length > 0 ? (
-                    cars.map((car) => <CarCard key={car.id} car={car} />)
+                {cars.data.length > 0 ? (
+                    cars.data.map((car) => <CarCard key={car.id} car={car} />)
                 ) : (
                     <h4 className="text-center">No cars available.</h4>
                 )}

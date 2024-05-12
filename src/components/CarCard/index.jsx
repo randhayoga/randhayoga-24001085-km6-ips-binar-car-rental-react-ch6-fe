@@ -50,7 +50,7 @@ const CarCard = ({ car }) => {
                     <Ratio aspectRatio="16x9">
                         <Card.Img
                             variant="top"
-                            src="images/carTemp.jpg"
+                            src={car?.image}
                             className="img-fit"
                         />
                     </Ratio>
@@ -67,10 +67,11 @@ const CarCard = ({ car }) => {
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <FaUserFriends className="me-2" />{" "}
-                                {car?.capacity}
+                                {car?.capacity} {"orang"}
                             </ListGroup.Item>
                             <ListGroup.Item>
-                                <FaMoneyCheckAlt className="me-2" />{" "}
+                                <FaMoneyCheckAlt className="me-2" />
+                                {"Rp."}
                                 {car?.rentPerDay}
                             </ListGroup.Item>
                             <ListGroup.Item>
