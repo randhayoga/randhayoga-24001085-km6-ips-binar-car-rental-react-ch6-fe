@@ -1,17 +1,26 @@
 import { Container, Row } from "react-bootstrap";
 import CarCard from "../../components/CarCard";
 
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCars } from "../../redux/actions/car";
+
 const Home = () => {
+    const dispatch = useDispatch();
+
+    const { cars } = useSelector((state) => state.car);
+    useEffect(() => {
+        dispatch(getCars());
+    }, [dispatch]);
+
     return (
         <Container className="mt-5 pt-5">
             <Row className="row">
-                {/* Map Students to Student Card*/}
-                <CarCard />
-                <CarCard />
-                <CarCard />
-                <CarCard />
-                <CarCard />
-                <CarCard />
+                {cars.length > 0 ? (
+                    cars.map((car) => <CarCard key={car.id} car={car} />)
+                ) : (
+                    <h4 className="text-center">No cars available.</h4>
+                )}
             </Row>
         </Container>
     );
