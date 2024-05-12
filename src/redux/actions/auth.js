@@ -85,7 +85,6 @@ export const getProfile =
         const { token } = state.auth;
 
         if (!token) {
-            console.log("Halo");
             dispatch(logout());
 
             // Redirect to error route
@@ -107,7 +106,6 @@ export const getProfile =
         try {
             const response = await axios.request(config);
             const { data } = response.data;
-            console.log(data);
 
             // Set user by response
             dispatch(setUser(data));

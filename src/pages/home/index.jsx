@@ -17,7 +17,7 @@ const Home = () => {
     return (
         <Container className="mt-5 pt-5">
             <Row className="row">
-                {cars.data.length > 0 ? (
+                {cars?.data?.length > 0 ? (
                     cars.data.map((car) => <CarCard key={car.id} car={car} />)
                 ) : (
                     <h4 className="text-center">No cars available.</h4>
